@@ -1,0 +1,22 @@
+.header {
+  width: 100%;
+  background-color: var(--color-light);
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 1200px;
+    height: 100px;
+    margin: 0 auto;
+
+    .filters {
+      display: flex;
+
+      column-gap: 30px;
+      align-items: center;
+    }
+  }
+}

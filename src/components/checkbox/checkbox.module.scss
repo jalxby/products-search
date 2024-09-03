@@ -1,0 +1,100 @@
+.root {
+  display: flex;
+  align-items: center;
+
+  &.left {
+    margin-left: -26px;
+  }
+}
+
+.container {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  border-radius: 50%;
+
+  &:active {
+    background-color: var(--color-dark-100);
+    outline: none;
+  }
+
+  &:hover {
+    background-color: var(--bg-color-secondary);
+  }
+
+  &:focus {
+    background-color: var(--color-dark-100);
+    border: none;
+  }
+
+  &.disabled {
+    cursor: initial;
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  width: 18px;
+  height: 18px;
+
+  background-color: transparent;
+  border: 2px solid;
+  border-color: var(--color-border);
+  border-radius: 3px;
+
+  &:enabled {
+    cursor: pointer;
+    outline: none;
+  }
+
+  &:disabled {
+    cursor: initial;
+    border-color: var(--color-dark-100);
+  }
+
+  &:focus {
+    outline: 2px solid var(--focus-color-secondary);
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  &[data-state='checked'] {
+    background-color: var(--bg-color-tertiary);
+  }
+
+  &[data-state='checked']:disabled {
+    color: var(--color-dark-100);
+    background-color: var(--color-light-700);
+  }
+}
+
+.label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  &.disabled {
+    cursor: initial;
+    color: var(--color-dark-100);
+  }
+}
+
+.indicator {
+  width: 18px;
+  height: 18px;
+}

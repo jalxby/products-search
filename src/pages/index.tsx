@@ -1,8 +1,5 @@
 import Head from 'next/head'
 
-import '@/styles/index.scss'
-import '@fontsource-variable/nunito'
-
 export default function Home() {
   return (
     <>

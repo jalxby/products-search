@@ -1,0 +1,74 @@
+@mixin button-mixin() {
+  all: unset;
+
+  cursor: pointer;
+
+  display: flex;
+  gap: 0.1rem;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  width: fit-content;
+  min-height: 36px;
+  padding: 0.6rem 2.4rem;
+
+  font-family: var(--font-family-primary), sans-serif;
+  font-size: var(--font-size-text);
+  font-weight: var(--font-weight-regular);
+  font-style: normal;
+  line-height: var(--line-height);
+  color: var(--color-light);
+  text-align: center;
+
+  border-radius: 4px;
+  outline: 4px solid transparent;
+  caret-color: transparent;
+
+  &:hover {
+    color: var(--color-dark);
+  }
+
+  &:active {
+  }
+
+  &:disabled {
+    cursor: initial;
+    background: var(--color-disabled);
+  }
+}
+
+.primary {
+  @include button-mixin;
+
+  background: var(--color-accent);
+
+  &:hover {
+    background: var(--color-accent);
+  }
+
+  &:active {
+    background: var(--color-accent-700);
+  }
+
+}
+
+
+.outlined {
+  @include button-mixin;
+
+  color: var(--color-accent);
+  background: transparent;
+  outline: 1px solid var(--color-accent);
+
+  &:hover {
+
+  }
+
+}
+
+
+.fullWidth {
+  justify-content: center;
+  width: 100%;
+}
