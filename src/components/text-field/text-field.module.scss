@@ -11,7 +11,6 @@
   align-items: flex-start;
   width: 100%;
 
-
   .label {
     user-select: none;
     width: 100%;
@@ -48,7 +47,6 @@
       width: 100%;
       padding: 6px calc(15px + var(--right-icon-width)) 6px 12px;
 
-
       background-color: transparent;
       border: 1px solid var(--color-border);
       border-radius: 3px;
@@ -67,7 +65,6 @@
       &:-webkit-autofill:focus {
         color: var(--text-color-primary);
         box-shadow: 0 0 0 3px var(--color-border) inset !important;
-
       }
 
       &.error {
