@@ -1,11 +1,6 @@
 import { FetchProductsParams, FetchProductsResponse } from '@/app/api/products/route'
 
 export async function fetchProducts(params: FetchProductsParams): Promise<FetchProductsResponse> {
-  const paramsToString = Object.entries(params)
-    .filter(([, value]) => value !== undefined)
-    .map(([key, value]) => [key, value.toString()])
-  const queryString = new URLSearchParams(paramsToString).toString()
-
   const response = await fetch('http://localhost:3000/api/products', {
     headers: {
       'Content-Type': 'application/json',
