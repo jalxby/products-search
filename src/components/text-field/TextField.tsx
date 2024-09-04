@@ -1,3 +1,4 @@
+'use client'
 import { forwardRef, useState } from 'react'
 
 import HideIcon from '@/assets/svg/hide-icon'
