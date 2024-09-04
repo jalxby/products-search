@@ -3,6 +3,7 @@ import { Content } from '@/components/content/Content'
 import { PaginationClientWrapper } from '@/components/pagination/PaginationClientWrapper'
 import { fetchProducts } from '@/utils/getProducts'
 
+export const dynamic = 'force-dynamic'
 const ProductsPage = async ({
   searchParams,
 }: {

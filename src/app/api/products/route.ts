@@ -29,10 +29,12 @@ export async function GET(request: Request) {
     const params = paramsHeader ? JSON.parse(paramsHeader) : {}
 
     const { active, limit, page, promo, search = '' } = params
-    const response = await fetch('https://642ec14a8ca0fe3352d7fe14.mockapi.io/api/v1/products')
+    const response = await fetch('https://642ec14a8ca0fe3352d7fe14.mockapi.io/api/v1/products', {
+      cache: 'no-store',
+    })
 
     if (!response.ok) {
-      new Error(`HTTP error! Status: ${response.status}`)
+      throw new Error(`HTTP error! Status: ${response.status}`)
     }
 
     const data: Data = await response.json()
@@ -56,3 +58,5 @@ export async function GET(request: Request) {
     return NextResponse.error()
   }
 }
+
+export const dynamic = 'force-dynamic'

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import { ReactNode } from 'react'
+import { ReactNode, Suspense } from 'react'
 
 import { Header } from '@/components/header/Header'
 
@@ -19,8 +19,10 @@ export default function RootLayout({
   return (
     <html lang={'en'}>
       <body>
-        <Header />
-        {children}
+        <Suspense fallback={<div>Loading...</div>}>
+          <Header />
+          {children}
+        </Suspense>
       </body>
     </html>
   )
