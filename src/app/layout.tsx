@@ -17,7 +17,7 @@ export default function RootLayout({
   children: ReactNode
 }>) {
   return (
-    <html lang={'en'}>
+    <html>
       <body>
         <Suspense fallback={<div>Loading...</div>}>
           <Header />

@@ -6,13 +6,14 @@ import { Checkbox } from '@/components/checkbox/checkbox'
 import { TextField } from '@/components/text-field/TextField'
 import { useDebounce } from '@/hooks/useDebounce'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { useMediaQuery } from 'usehooks-ts'
 
 import s from './header.module.scss'
 
 export const Header = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
-
+  const matches = useMediaQuery('(min-width: 768px)')
   const initialSearch = searchParams.get('search') || ''
   const initialPromo = searchParams.get('promo') === 'true'
   const initialActive = searchParams.get('active') === 'true'

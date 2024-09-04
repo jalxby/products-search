@@ -1,4 +1,3 @@
-'use client'
 import { Product } from '@/app/api/products/route'
 import { GridWrapper } from '@/components/grid-wrapper/GridWrapper'
 import { ProductCard } from '@/components/product/Product'
@@ -9,9 +8,5 @@ export const Content = ({ products }: Props) => {
     return <ProductCard key={value.id} {...value} />
   })
 
-  return (
-    <>
-      <GridWrapper columns={4} items={productsToGrid}></GridWrapper>
-    </>
-  )
+  return <GridWrapper columns={4} items={productsToGrid}></GridWrapper>
 }

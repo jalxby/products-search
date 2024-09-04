@@ -3,3 +3,21 @@
   gap: 16px;
   padding: 16px;
 }
+
+@media (620px<=width <= 920px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (920px<=width <= 1200px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media (width <620px) {
+  .container {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+}
