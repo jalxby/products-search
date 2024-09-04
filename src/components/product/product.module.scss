@@ -1,8 +1,24 @@
 .card {
+  position: relative;
+
   display: flex;
   flex-direction: column;
+
   width: 288px;
   height: 400px;
+
+  .badge {
+    position: absolute;
+    top: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--color-light);
+
+    background-color: var(--color-warning);
+  }
 
   .image {
     border-top-left-radius: 7px;
@@ -22,5 +38,13 @@
 
     height: 100%;
     padding: 16px 16px 24px;
+
+    .buttonGroup {
+      width: 100%;
+
+      button {
+        margin-top: 16px;
+      }
+    }
   }
 }

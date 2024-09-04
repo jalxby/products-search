@@ -1,4 +1,5 @@
 import { Product } from '@/app/api/products/route'
+import { Badge } from '@/components/badge/Badge'
 import { Button } from '@/components/button/Button'
 import { Card } from '@/components/card/Card'
 import { Description } from '@/components/description/Description'
@@ -19,21 +20,23 @@ export const ProductCard = ({
 }: Product) => {
   return (
     <Card className={s.card}>
+      {promotion && <Badge className={s.badge} title={'Promo'} />}
       <Image
         alt={name + '_image'}
         className={clsx(s.image, active && s.active)}
         height={170}
-        priority
+        loading={'lazy'}
         src={image + `?id=${id}`}
         width={288}
       />
       <div className={s.content}>
-        {promotion && <h6>{'promotion'}</h6>}
         <Description description={description} title={name} />
-        <Grade grade={+rating as GradeType} />
-        <Button disabled={active} fullWidth>
-          {'Show details'}
-        </Button>
+        <div className={s.buttonGroup}>
+          <Grade grade={+rating as GradeType} />
+          <Button disabled={active} fullWidth>
+            {'Show details'}
+          </Button>
+        </div>
       </div>
     </Card>
   )

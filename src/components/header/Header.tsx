@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Button } from '@/components/button/Button'
 import { Checkbox } from '@/components/checkbox/checkbox'
@@ -12,19 +12,35 @@ import s from './header.module.scss'
 export const Header = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [search, setSearch] = useState('')
+
+  const initialSearch = searchParams.get('search') || ''
+  const initialPromo = searchParams.get('promo') === 'true'
+  const initialActive = searchParams.get('active') === 'true'
+
+  const [search, setSearch] = useState(initialSearch)
+  const [isPromo, setIsPromo] = useState(initialPromo)
+  const [isActive, setIsActive] = useState(initialActive)
+
+  useEffect(() => {
+    setSearch(initialSearch)
+    setIsPromo(initialPromo)
+    setIsActive(initialActive)
+  }, [searchParams])
+
   const onPromoChange = (isPromoted: boolean) => {
     const params = new URLSearchParams(searchParams.toString())
 
     isPromoted ? params.set('promo', isPromoted.toString()) : params.delete('promo')
     router.push(`?${params.toString()}`)
   }
+
   const onActiveChange = (isActive: boolean) => {
     const params = new URLSearchParams(searchParams.toString())
 
     isActive ? params.set('active', isActive.toString()) : params.delete('active')
     router.push(`?${params.toString()}`)
   }
+
   const onSearchChange = () => {
     const params = new URLSearchParams(searchParams.toString())
 
@@ -39,12 +55,27 @@ export const Header = () => {
       <div className={s.container}>
         <div>Logo</div>
         <div className={s.filters}>
-          <Checkbox labelTitle={'Active'} onChange={onActiveChange} />
-          <Checkbox labelTitle={'Promo'} onChange={onPromoChange} />
+          <Checkbox
+            checked={isActive}
+            labelTitle={'Active'}
+            onChange={checked => {
+              setIsActive(checked)
+              onActiveChange(checked)
+            }}
+          />
+          <Checkbox
+            checked={isPromo}
+            labelTitle={'Promo'}
+            onChange={checked => {
+              setIsPromo(checked)
+              onPromoChange(checked)
+            }}
+          />
           <TextField
             inputType={'search'}
             onChange={event => setSearch(event.currentTarget.value)}
             placeholder={'Search'}
+            value={search}
           />
         </div>
         <div>

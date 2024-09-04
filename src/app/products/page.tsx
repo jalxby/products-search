@@ -3,6 +3,8 @@ import { Content } from '@/components/content/Content'
 import { PaginationClientWrapper } from '@/components/pagination/PaginationClientWrapper'
 import { fetchProducts } from '@/utils/getProducts'
 
+import s from './page.module.scss'
+
 export const dynamic = 'force-dynamic'
 const ProductsPage = async ({
   searchParams,
@@ -22,9 +24,14 @@ const ProductsPage = async ({
   const { products, total } = await fetchProducts(params)
 
   return (
-    <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column', rowGap: '26px' }}>
+    <div className={s.page}>
       <Content products={products} />
-      <PaginationClientWrapper currentPage={+page} pageSize={limit} totalCount={total} />
+      <PaginationClientWrapper
+        className={s.pagination}
+        currentPage={+page}
+        pageSize={limit}
+        totalCount={total}
+      />
     </div>
   )
 }

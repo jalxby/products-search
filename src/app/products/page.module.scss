@@ -1,0 +1,10 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  row-gap: 26px;
+  align-items: center;
+
+  .pagination {
+    margin-bottom: 16px;
+  }
+}

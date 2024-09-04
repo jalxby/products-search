@@ -18,8 +18,8 @@ export const Grade: FC<GradeProps> = ({ grade = 0, onClick }) => {
   const starCount = 5
   const outlineStars = starCount - realGrade
   const stars = [
-    ...Array(realGrade).fill(<StarIcon />),
-    ...Array(outlineStars).fill(<StarOutlineIcon />),
+    ...Array(realGrade).fill(<StarIcon color={'var(--color-warning)'} />),
+    ...Array(outlineStars).fill(<StarOutlineIcon color={'var(--color-warning)'} />),
   ]
 
   return (

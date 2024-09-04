@@ -4,12 +4,14 @@ import { Pagination } from '@/components/pagination/Pagination'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 interface PaginationClientWrapperProps {
+  className?: string
   currentPage: number
   pageSize: number
   totalCount: number
 }
 
 export const PaginationClientWrapper = ({
+  className,
   currentPage,
   pageSize,
   totalCount,
@@ -26,6 +28,7 @@ export const PaginationClientWrapper = ({
 
   return (
     <Pagination
+      className={className}
       currentPage={currentPage}
       onPageChange={onPageChange}
       pageSize={pageSize}

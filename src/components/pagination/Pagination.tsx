@@ -15,7 +15,7 @@ export type PaginationPropsType = {
   totalCount: number
 }
 export const Pagination: FC<PaginationPropsType> = props => {
-  const { currentPage, onPageChange, pageSize, siblingCount = 1, totalCount } = props
+  const { className, currentPage, onPageChange, pageSize, siblingCount = 1, totalCount } = props
   const DOTS = '\u2026'
   const paginationRange = usePagination({
     DOTS,
@@ -32,15 +32,14 @@ export const Pagination: FC<PaginationPropsType> = props => {
   const leftTabIndex = disabledLeft ? -1 : 0
   const rightTabIndex = disableRight ? -1 : 0
 
-  const cNames = {
-    container: clsx(s.container),
+  const styles = {
+    container: clsx(s.container, className),
     dots: clsx(s.page, s.dots),
     leftArrow: clsx(s.page, disabledLeft && s.disabled),
     page: clsx(s.page),
     pages: clsx(s.pages),
     rightArrow: clsx(s.page, disableRight && s.disabled),
     rowsPerPage: clsx(s.rowsPerPage),
-    select: clsx(s.select),
   }
 
   if (currentPage === 0 || paginationRange.length < 1) {
@@ -76,7 +75,7 @@ export const Pagination: FC<PaginationPropsType> = props => {
     }
 
     return pageNumber === DOTS ? (
-      <div className={cNames.dots} key={index}>
+      <div className={styles.dots} key={index}>
         {DOTS}
       </div>
     ) : (
@@ -93,19 +92,19 @@ export const Pagination: FC<PaginationPropsType> = props => {
   })
 
   return (
-    <div className={cNames.container}>
-      <div className={cNames.pages}>
+    <div className={styles.container}>
+      <div className={styles.pages}>
         <div
-          className={cNames.leftArrow}
+          className={styles.leftArrow}
           onClick={onPrevious}
           onKeyDown={onKeyDownSpaceLeft}
           tabIndex={leftTabIndex}
         >
-          {'Previous'}
+          {'First'}
         </div>
         {pages}
         <div
-          className={cNames.rightArrow}
+          className={styles.rightArrow}
           onClick={onNext}
           onKeyDown={onKeyDownSpaceRight}
           tabIndex={rightTabIndex}

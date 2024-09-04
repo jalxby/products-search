@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function Home() {
-  return <>{'hello'}</>
+  return <Link href={'/products'}>{'Products'}</Link>
 }
