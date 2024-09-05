@@ -1,3 +1,4 @@
+'use client'
 import { Product } from '@/app/api/products/route'
 import { Badge } from '@/components/badge/Badge'
 import { Button } from '@/components/button/Button'
@@ -6,6 +7,7 @@ import { Description } from '@/components/description/Description'
 import { Grade, GradeType } from '@/components/grade/Grade'
 import { clsx } from 'clsx'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 import s from './product.module.scss'
 
@@ -18,6 +20,12 @@ export const ProductCard = ({
   promotion,
   rating,
 }: Product) => {
+  const router = useRouter()
+
+  const handleClick = () => {
+    void router.push(`/products/${id}`)
+  }
+
   return (
     <Card className={s.card}>
       {promotion && <Badge className={s.badge} title={'Promo'} />}
@@ -33,7 +41,7 @@ export const ProductCard = ({
         <Description description={description} title={name} />
         <div className={s.buttonGroup}>
           <Grade grade={+rating as GradeType} />
-          <Button disabled={active} fullWidth>
+          <Button disabled={active} fullWidth onClick={handleClick}>
             {'Show details'}
           </Button>
         </div>

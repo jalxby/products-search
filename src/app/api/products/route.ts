@@ -39,7 +39,6 @@ export async function GET(request: Request) {
 
     const data: Data = await response.json()
     const filtered = data
-
       .filter(item => {
         return active ? !item.active : item
       })
@@ -51,7 +50,10 @@ export async function GET(request: Request) {
       })
     const paginated = filtered.slice((page - 1) * limit, (page - 1) * limit + limit)
 
-    return NextResponse.json<FetchProductsResponse>({ products: paginated, total: filtered.length })
+    return NextResponse.json<FetchProductsResponse>({
+      products: params ? paginated : data,
+      total: params ? filtered.length : data.length,
+    })
   } catch (error) {
     console.error('Error fetching products:', error)
 
