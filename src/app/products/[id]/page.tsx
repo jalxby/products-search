@@ -1,20 +1,23 @@
+import { Product } from '@/app/api/products/route'
 import { fetchProducts } from '@/utils/getProducts'
 
 export const generateStaticParams = async () => {
-  const data = await fetchProducts({})
+  const response = await fetch('https://642ec14a8ca0fe3352d7fe14.mockapi.io/api/v1/products')
+  const products: Product[] = await response.json()
 
-  return data.products.map(({ id }) => ({ id }))
+  if (!products) {
+    return []
+  }
+
+  return products.map(({ id }) => ({ id }))
 }
 
 export const revalidate = 10
 
 const ProductDetailPage = async ({ params }: { params: { id: string } }) => {
-  console.log('params', params)
-
   return (
     <div>
       <h1>{params.id}</h1>
-      <h1>{'params.productId'}</h1>
     </div>
   )
 }
