@@ -1,6 +1,6 @@
 import { Product } from '@/app/api/products/route'
 import { GridWrapper } from '@/components/grid-wrapper/GridWrapper'
-import { ProductCard } from '@/components/product/Product'
+import ProductCard from '@/components/product/Product'
 
 type Props = { products: Product[] }
 export const Content = ({ products }: Props) => {

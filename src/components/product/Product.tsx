@@ -1,4 +1,3 @@
-'use client'
 import { Product } from '@/app/api/products/route'
 import { Badge } from '@/components/badge/Badge'
 import { Button } from '@/components/button/Button'
@@ -7,25 +6,20 @@ import { Description } from '@/components/description/Description'
 import { Grade, GradeType } from '@/components/grade/Grade'
 import { clsx } from 'clsx'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 import s from './product.module.scss'
 
-export const ProductCard = ({
+const ProductCard = ({
   active,
   description,
+  hideButton,
   id,
   image,
   name,
   promotion,
   rating,
-}: Product) => {
-  const router = useRouter()
-
-  const handleClick = () => {
-    void router.push(`/products/${id}`)
-  }
-
+}: { hideButton?: boolean } & Product) => {
   return (
     <Card className={s.card}>
       {promotion && <Badge className={s.badge} title={'Promo'} />}
@@ -41,11 +35,17 @@ export const ProductCard = ({
         <Description description={description} title={name} />
         <div className={s.buttonGroup}>
           <Grade grade={+rating as GradeType} />
-          <Button disabled={active} fullWidth onClick={handleClick}>
-            {'Show details'}
-          </Button>
+          {!hideButton && (
+            <Link href={`/products/${id}`} style={{ pointerEvents: `${active ? 'none' : 'auto'}` }}>
+              <Button disabled={active} fullWidth>
+                {'Show details'}
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
     </Card>
   )
 }
+
+export default ProductCard
