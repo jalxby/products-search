@@ -49,7 +49,7 @@ const ProductsPage = async ({
       <Content products={products} />
       <PaginationClientWrapper
         className={s.pagination}
-        currentPage={+page}
+        currentPage={+page || 1}
         pageSize={+limit}
         totalCount={total}
       />

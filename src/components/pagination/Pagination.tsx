@@ -15,7 +15,7 @@ export type PaginationPropsType = {
   totalCount: number
 }
 export const Pagination: FC<PaginationPropsType> = props => {
-  const { className, currentPage, onPageChange, pageSize, siblingCount = 1, totalCount } = props
+  const { className, currentPage = 1, onPageChange, pageSize, siblingCount = 1, totalCount } = props
   const DOTS = '\u2026'
   const paginationRange = usePagination({
     DOTS,
