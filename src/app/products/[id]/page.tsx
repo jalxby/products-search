@@ -1,5 +1,4 @@
 import { Product } from '@/app/api/products/route'
-import { fetchProducts } from '@/utils/getProducts'
 
 export const generateStaticParams = async () => {
   const response = await fetch('https://642ec14a8ca0fe3352d7fe14.mockapi.io/api/v1/products')

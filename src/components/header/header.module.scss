@@ -4,7 +4,6 @@
 
   .container {
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: space-between;
 
@@ -12,11 +11,54 @@
     max-width: 1200px;
     height: 100px;
     margin: 0 auto;
+    padding: 30px 16px;
 
-    .filters {
+    .filters,
+    .checkBoxGroup {
       display: flex;
       column-gap: 30px;
       align-items: center;
     }
+
+    @media (width<=620px) {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      grid-template-rows: auto auto;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+
+      height: 200px;
+
+
+      .logo {
+        grid-column: 1 / 2;
+        grid-row: 1;
+      }
+
+      .button {
+        grid-column: 3;
+        grid-row: 1;
+        justify-self: end;
+      }
+
+      .filters {
+        grid-column: 1 / 4;
+        grid-row: 2;
+        flex-direction: column-reverse;
+      }
+    }
   }
+}
+
+@media (width<=620px) {
+  .container {
+    flex-direction: column;
+    height: 200px;
+
+    .filters {
+      flex-direction: column-reverse;
+    }
+  }
+
 }

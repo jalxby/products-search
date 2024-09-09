@@ -5,7 +5,7 @@ import { Button } from '@/components/button/Button'
 import { Checkbox } from '@/components/checkbox/checkbox'
 import { TextField } from '@/components/text-field/TextField'
 import { useDebounce } from '@/hooks/useDebounce'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useMediaQuery } from 'usehooks-ts'
 
 import s from './header.module.scss'
@@ -13,10 +13,12 @@ import s from './header.module.scss'
 export const Header = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const matches = useMediaQuery('(min-width: 768px)')
+  const pathname = usePathname()
+  const isProductPage = /^\/products\/\w+$/i.test(pathname)
   const initialSearch = searchParams.get('search') || ''
   const initialPromo = searchParams.get('promo') === 'true'
   const initialActive = searchParams.get('active') === 'true'
+  const isMobile = useMediaQuery('(max-width: 620px)')
 
   const [search, setSearch] = useState(initialSearch)
   const [isPromo, setIsPromo] = useState(initialPromo)
@@ -27,6 +29,14 @@ export const Header = () => {
     setIsPromo(initialPromo)
     setIsActive(initialActive)
   }, [searchParams])
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString())
+    const limit = isMobile ? 3 : 8
+
+    params.set('limit', limit.toString())
+    router.push(`?${params.toString()}`)
+  }, [isMobile, router, searchParams])
 
   const onPromoChange = (isPromoted: boolean) => {
     const params = new URLSearchParams(searchParams.toString())
@@ -54,32 +64,36 @@ export const Header = () => {
   return (
     <div className={s.header}>
       <div className={s.container}>
-        <div>Logo</div>
-        <div className={s.filters}>
-          <Checkbox
-            checked={isActive}
-            labelTitle={'Active'}
-            onChange={checked => {
-              setIsActive(checked)
-              onActiveChange(checked)
-            }}
-          />
-          <Checkbox
-            checked={isPromo}
-            labelTitle={'Promo'}
-            onChange={checked => {
-              setIsPromo(checked)
-              onPromoChange(checked)
-            }}
-          />
-          <TextField
-            inputType={'search'}
-            onChange={event => setSearch(event.currentTarget.value)}
-            placeholder={'Search'}
-            value={search}
-          />
-        </div>
-        <div>
+        <div className={s.logo}>Logo</div>
+        {!isProductPage && (
+          <div className={s.filters}>
+            <div className={s.checkBoxGroup}>
+              <Checkbox
+                checked={isActive}
+                labelTitle={'Active'}
+                onChange={checked => {
+                  setIsActive(checked)
+                  onActiveChange(checked)
+                }}
+              />
+              <Checkbox
+                checked={isPromo}
+                labelTitle={'Promo'}
+                onChange={checked => {
+                  setIsPromo(checked)
+                  onPromoChange(checked)
+                }}
+              />
+            </div>
+            <TextField
+              inputType={'search'}
+              onChange={event => setSearch(event.currentTarget.value)}
+              placeholder={'Search'}
+              value={search}
+            />
+          </div>
+        )}
+        <div className={s.button}>
           <Button type={'button'} variant={'outlined'}>
             Log in
           </Button>

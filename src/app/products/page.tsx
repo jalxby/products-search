@@ -4,7 +4,6 @@ import { FetchProductsParams } from '@/app/api/products/route'
 import { Content } from '@/components/content/Content'
 import { PaginationClientWrapper } from '@/components/pagination/PaginationClientWrapper'
 import { fetchProducts } from '@/utils/getProducts'
-import Head from 'next/head'
 
 import s from './page.module.scss'
 
@@ -33,11 +32,11 @@ const ProductsPage = async ({
 }: {
   searchParams: Record<keyof FetchProductsParams, string>
 }) => {
-  const { active, page, promo, search } = searchParams
-  const limit = 8
+  const { active, limit, page, promo, search } = searchParams
+
   const params: FetchProductsParams = {
     active: active === 'true',
-    limit: limit,
+    limit: +limit,
     page: +page || 1,
     promo: promo === 'true',
     search,
@@ -51,7 +50,7 @@ const ProductsPage = async ({
       <PaginationClientWrapper
         className={s.pagination}
         currentPage={+page}
-        pageSize={limit}
+        pageSize={+limit}
         totalCount={total}
       />
     </div>
