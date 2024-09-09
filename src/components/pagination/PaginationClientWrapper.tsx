@@ -32,7 +32,7 @@ export const PaginationClientWrapper = ({
       currentPage={currentPage}
       onPageChange={onPageChange}
       pageSize={pageSize}
-      siblingCount={2}
+      siblingCount={1}
       totalCount={totalCount}
     />
   )
